@@ -1175,10 +1175,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             mUserNavBarWidth = NavWidth;
             resetScreenHelper();
         }
-        if (mHasNavigationBar != showNavBarNow) {
-            mHasNavigationBar = showNavBarNow;
-            resetScreenHelper();
-        }
     }
 
     private void resetScreenHelper() {
@@ -2614,8 +2610,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     mSystemTop = mUnrestrictedScreenTop + mStatusBarHeight;
                 }
             }
-            mDockBottom = (navVisible && !mNavBarAutoHide) ? mRestrictedScreenTop + mRestrictedScreenHeight : mDockBottom;
-            mDockRight = (navVisible && !mNavBarAutoHide) ? mRestrictedScreenLeft + mRestrictedScreenWidth: mDockRight;
         }
     }
 
