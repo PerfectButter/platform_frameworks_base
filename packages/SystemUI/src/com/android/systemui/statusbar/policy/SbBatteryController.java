@@ -39,6 +39,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.util.Log;
+import android.util.Slog;
 
 import com.android.systemui.R;
 
@@ -224,10 +226,12 @@ public class SbBatteryController extends LinearLayout {
     }
 
     private void updateSettings() {
-        // Slog.i(TAG, "updated settings values");
         ContentResolver cr = mContext.getContentResolver();
         mBatteryStyle = Settings.System.getInt(cr,
                 Settings.System.STATUSBAR_BATTERY_ICON, 0);
+    Slog.i(TAG, "(SbBatteryController) Slog.i New Battery Icon Selected");
+    Log.d(TAG, "(SbBatteryController) Log.d New Battery Icon Selected");
+
 
         switch (mBatteryStyle) {
             case STYLE_ICON_ONLY:
@@ -261,6 +265,8 @@ public class SbBatteryController extends LinearLayout {
                 setVisibility(View.GONE);
                 break;
             case STYLE_ICON_CIRCLE:
+            Slog.i(TAG, "(SbBatteryController) Slog.i Circle Mod selected");
+            Log.d(TAG, "(SbBatteryController) Log.d Circle Mod Selected");
                 mBatteryText.setVisibility(View.GONE);
                 mBatteryCenterText.setVisibility(View.GONE);
                 mBatteryIcon.setVisibility(View.VISIBLE);
