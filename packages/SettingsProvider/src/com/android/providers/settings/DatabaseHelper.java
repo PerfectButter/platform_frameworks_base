@@ -1946,6 +1946,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // Set default tty mode
             loadSetting(stmt, Settings.System.TTY_MODE, 0);
 
+            // Set default noise suppression value
+            loadSetting(stmt, Settings.System.NOISE_SUPPRESSION, 0);
+
             loadIntegerSetting(stmt, Settings.System.SCREEN_BRIGHTNESS,
                     R.integer.def_screen_brightness);
 
@@ -1978,7 +1981,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 R.bool.def_sound_effects_enabled);
         loadBooleanSetting(stmt, Settings.System.HAPTIC_FEEDBACK_ENABLED,
                 R.bool.def_haptic_feedback);
-
+        loadIntegerSetting(stmt, Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED,
+            R.integer.def_volume_adjust_sounds_enabled);
         loadIntegerSetting(stmt, Settings.System.LOCKSCREEN_SOUNDS_ENABLED,
             R.integer.def_lockscreen_sounds_enabled);
     }
@@ -2225,12 +2229,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             // Set the preferred network mode to 0 = Global, CDMA default
             int type;
-            if (TelephonyManager.getLteOnCdmaModeStatic() == PhoneConstants.LTE_ON_CDMA_TRUE) {
-                type = Phone.NT_MODE_GLOBAL;
-            } else {
                 type = SystemProperties.getInt("ro.telephony.default_network",
                         RILConstants.PREFERRED_NETWORK_MODE);
-            }
             loadSetting(stmt, Settings.Global.PREFERRED_NETWORK_MODE, type);
 
             // --- New global settings start here
